@@ -29,8 +29,8 @@ services:
       "
 
   storage:
-    container_name: supabase-storage
-    image: supabase/storage-api:v1.37.8
+    container_name: indusbase-storage
+    image: indusbase/storage-api:v1.37.8
     restart: unless-stopped
     depends_on:
       db:
@@ -62,7 +62,7 @@ services:
       SERVICE_KEY: ${SERVICE_ROLE_KEY}
       POSTGREST_URL: http://rest:3000
       PGRST_JWT_SECRET: ${JWT_SECRET}
-      DATABASE_URL: postgres://supabase_storage_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      DATABASE_URL: postgres://indusbase_storage_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       REQUEST_ALLOW_X_FORWARDED_PATH: "true"
       FILE_SIZE_LIMIT: 52428800
       STORAGE_BACKEND: s3
@@ -76,7 +76,7 @@ services:
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
       #FILE_STORAGE_BACKEND_PATH: /var/lib/storage
       TENANT_ID: ${STORAGE_TENANT_ID}
-      # TODO: https://github.com/supabase/storage-api/issues/55
+      # TODO: https://github.com/indusbase/storage-api/issues/55
       REGION: ${REGION}
       ENABLE_IMAGE_TRANSFORMATION: "true"
       IMGPROXY_URL: http://imgproxy:5001

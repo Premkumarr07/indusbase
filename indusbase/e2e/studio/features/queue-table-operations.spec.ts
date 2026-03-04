@@ -6,7 +6,7 @@ import { test } from '../utils/test.js'
 import { toUrl } from '../utils/to-url.js'
 import { waitForTableToLoad } from '../utils/wait-for-response.js'
 
-const QUEUE_OPERATIONS_KEY = 'supabase-ui-queue-operations'
+const QUEUE_OPERATIONS_KEY = 'indusbase-ui-queue-operations'
 const tableNamePrefix = 'pw_queue_table'
 
 const enableQueueOperations = async (page: Page) => {

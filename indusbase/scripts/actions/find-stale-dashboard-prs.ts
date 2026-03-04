@@ -1,7 +1,7 @@
 const TWENTY_FOUR_HOURS_AGO = new Date(Date.now() - 24 * 60 * 60 * 1000)
 const DASHBOARD_PATH = 'apps/studio/'
-const REPO_OWNER = 'supabase'
-const REPO_NAME = 'supabase'
+const REPO_OWNER = 'indusbase'
+const REPO_NAME = 'indusbase'
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
 

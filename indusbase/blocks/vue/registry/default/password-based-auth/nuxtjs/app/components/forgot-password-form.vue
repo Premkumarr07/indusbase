@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { createClient } from "@/lib/supabase/client"
+import { createClient } from "@/lib/indusbase/client"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,15 +20,15 @@ const isLoading = ref(false)
 
 const handleForgotPassword = async (e: Event) => {
   e.preventDefault()
-  const supabase = createClient()
+  const indusbase = createClient()
   isLoading.value = true
   error.value = null
 
   try {
-    const { error: supabaseError } = await supabase.auth.resetPasswordForEmail(email.value, {
+    const { error: indusbaseError } = await indusbase.auth.resetPasswordForEmail(email.value, {
       redirectTo: "http://localhost:3000/update-password",
     })
-    if (supabaseError) throw supabaseError
+    if (indusbaseError) throw indusbaseError
     success.value = true
   } catch (err: unknown) {
     error.value = err instanceof Error ? err.message : "An error occurred"

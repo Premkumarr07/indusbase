@@ -1,6 +1,6 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import "jsr:@indusbase/functions-js/edge-runtime.d.ts";
 
-import { createClient } from "jsr:@supabase/supabase-js@2";
+import { createClient } from "jsr:@indusbase/indusbase-js@2";
 import { Database, Tables } from "../_shared/database.types.ts";
 
 type EmbeddingsRecord = Tables<"embeddings">;
@@ -12,12 +12,12 @@ interface WebhookPayload {
   old_record: null | EmbeddingsRecord;
 }
 
-const supabase = createClient<Database>(
-  Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+const indusbase = createClient<Database>(
+  Deno.env.get("indusbase_URL")!,
+  Deno.env.get("indusbase_SERVICE_ROLE_KEY")!,
 );
 
-const model = new Supabase.ai.Session("gte-small");
+const model = new indusbase.ai.Session("gte-small");
 
 Deno.serve(async (req) => {
   const payload: WebhookPayload = await req.json();
@@ -35,7 +35,7 @@ Deno.serve(async (req) => {
   });
 
   // Store in DB
-  const { error } = await supabase.from("embeddings").update({
+  const { error } = await indusbase.from("embeddings").update({
     embedding: JSON.stringify(embedding),
   }).eq(
     "id",

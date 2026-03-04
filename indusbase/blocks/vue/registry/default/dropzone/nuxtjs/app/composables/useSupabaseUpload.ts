@@ -2,16 +2,16 @@ import { useDropZone } from '@vueuse/core'
 import { computed, onUnmounted, ref, watch } from 'vue'
 
 // @ts-ignore
-import { createClient } from '@/lib/supabase/client'
+import { createClient } from '@/lib/indusbase/client'
 
-const supabase = createClient()
+const indusbase = createClient()
 
 export interface FileWithPreview extends File {
   preview?: string
   errors: { code: string; message: string }[]
 }
 
-export type UseSupabaseUploadOptions = {
+export type UseindusbaseUploadOptions = {
   bucketName: string
   path?: string
   allowedMimeTypes?: string[]
@@ -35,7 +35,7 @@ function validateFileSize(file: File, maxSize: number) {
     : []
 }
 
-export function useSupabaseUpload(options: UseSupabaseUploadOptions) {
+export function useindusbaseUpload(options: UseindusbaseUploadOptions) {
   const {
     bucketName,
     path,
@@ -90,7 +90,7 @@ export function useSupabaseUpload(options: UseSupabaseUploadOptions) {
 
       const responses = await Promise.all(
         filesToUpload.map(async (file) => {
-          const { error } = await supabase.storage
+          const { error } = await indusbase.storage
             .from(bucketName)
             .upload(path ? `${path}/${file.name}` : file.name, file, {
               cacheControl: cacheControl.toString(),

@@ -4,8 +4,8 @@
   "ignore": [
     "examples/**",
     "**/*.mdx",
-    // skip supabase functions
-    "supabase/functions/**",
+    // skip indusbase functions
+    "indusbase/functions/**",
     "**/*.test.ts",
     // ignore studio public folder
     "apps/studio/public/**",

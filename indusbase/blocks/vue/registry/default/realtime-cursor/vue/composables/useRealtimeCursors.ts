@@ -1,8 +1,8 @@
-import { REALTIME_SUBSCRIBE_STATES, type RealtimeChannel } from '@supabase/supabase-js'
+import { REALTIME_SUBSCRIBE_STATES, type RealtimeChannel } from '@indusbase/indusbase-js'
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
 
 // @ts-ignore
-import { createClient } from '@/lib/supabase/client'
+import { createClient } from '@/lib/indusbase/client'
 
 /**
  * Throttle a callback to a certain delay.
@@ -46,7 +46,7 @@ function useThrottleCallback<Params extends unknown[]>(
   return { run, cancel }
 }
 
-const supabase = createClient()
+const indusbase = createClient()
 
 const generateRandomColor = () => `hsl(${Math.floor(Math.random() * 360)}, 100%, 70%)`
 
@@ -106,7 +106,7 @@ export function useRealtimeCursors({
   )
 
   onMounted(() => {
-    const channel = supabase.channel(roomName)
+    const channel = indusbase.channel(roomName)
 
     channel
       .on('system', {}, (payload: CursorEventPayload) => {

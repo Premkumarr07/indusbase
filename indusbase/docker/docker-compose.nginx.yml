@@ -4,7 +4,7 @@ services:
     ports: !reset []
 
   nginx:
-    container_name: supabase-nginx
+    container_name: indusbase-nginx
     image: jonasal/nginx-certbot:6.0.1-nginx1.29.5
     restart: unless-stopped
     ports:
@@ -23,10 +23,10 @@ services:
       - -c
       - |
         printf '%s:%s\n' "$${PROXY_AUTH_USERNAME}" "$$(openssl passwd -apr1 "$${PROXY_AUTH_PASSWORD}")" > /etc/nginx/user_conf.d/dashboard-passwd && \
-        envsubst '$${PROXY_DOMAIN}' < /etc/nginx/supabase-nginx.conf.tpl > /etc/nginx/user_conf.d/nginx.conf && \
+        envsubst '$${PROXY_DOMAIN}' < /etc/nginx/indusbase-nginx.conf.tpl > /etc/nginx/user_conf.d/nginx.conf && \
         /scripts/start_nginx_certbot.sh
     volumes:
-      - ./volumes/proxy/nginx/supabase-nginx.conf.tpl:/etc/nginx/supabase-nginx.conf.tpl:ro
+      - ./volumes/proxy/nginx/indusbase-nginx.conf.tpl:/etc/nginx/indusbase-nginx.conf.tpl:ro
       - nginx_letsencrypt:/etc/letsencrypt
 
 volumes:

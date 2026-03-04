@@ -8,7 +8,7 @@ import {
   BedrockRuntimeClient,
   InvokeModelCommand,
 } from "npm:@aws-sdk/client-bedrock-runtime";
-import { createClient } from "npm:@supabase/supabase-js";
+import { createClient } from "npm:@indusbase/indusbase-js";
 import { decode } from "npm:base64-arraybuffer";
 
 console.log("Hello from Amazon Bedrock!");
@@ -59,14 +59,14 @@ Deno.serve(async (req) => {
     console.log(parsedData);
     const image = parsedData.images[0];
 
-    const supabaseClient = createClient(
-      // Supabase API URL - env var exported by default.
-      Deno.env.get("SUPABASE_URL")!,
-      // Supabase API ANON KEY - env var exported by default.
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    const indusbaseClient = createClient(
+      // indusbase API URL - env var exported by default.
+      Deno.env.get("indusbase_URL")!,
+      // indusbase API ANON KEY - env var exported by default.
+      Deno.env.get("indusbase_SERVICE_ROLE_KEY")!,
     );
 
-    const { data: upload, error: uploadError } = await supabaseClient.storage
+    const { data: upload, error: uploadError } = await indusbaseClient.storage
       .from("images")
       .upload(`${$metadata.requestId ?? ""}.png`, decode(image), {
         contentType: "image/png",
@@ -76,7 +76,7 @@ Deno.serve(async (req) => {
     if (!upload) {
       return Response.json(uploadError);
     }
-    const { data } = supabaseClient
+    const { data } = indusbaseClient
       .storage
       .from("images")
       .getPublicUrl(upload.path!);
@@ -88,8 +88,8 @@ Deno.serve(async (req) => {
 
 /* To invoke locally:
 
-  1. Run `supabase start` (see: https://supabase.com/docs/reference/cli/supabase-start)
-  2. Start with env: `supabase functions serve --env-file supabase/.env`
+  1. Run `indusbase start` (see: https://indusbase.com/docs/reference/cli/indusbase-start)
+  2. Start with env: `indusbase functions serve --env-file indusbase/.env`
   3. Make an HTTP request:
 
   curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/image_gen' \

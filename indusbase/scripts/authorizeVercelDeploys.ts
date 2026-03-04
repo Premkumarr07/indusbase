@@ -26,16 +26,16 @@ const jobInfoSchema = z.object({
       sha: z.string().min(1, 'SHA is required'),
     }),
     id: z.string().min(1, 'ID is required'),
-    org: z.literal('supabase'),
+    org: z.literal('indusbase'),
     prId: z.number().int().positive('PR ID must be a positive integer'),
-    repo: z.literal('supabase'),
+    repo: z.literal('indusbase'),
   }),
 })
 
 type JobInfo = z.infer<typeof jobInfoSchema>
 
 async function fetchGitHubStatuses(sha: string): Promise<GitHubStatus[]> {
-  const url = `https://api.github.com/repos/supabase/supabase/statuses/${sha}`
+  const url = `https://api.github.com/repos/indusbase/indusbase/statuses/${sha}`
   console.log(`Fetching GitHub statuses for SHA: ${sha}`)
 
   const response = await fetch(url)
